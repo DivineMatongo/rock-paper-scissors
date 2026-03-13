@@ -1,6 +1,3 @@
-let humanScore = 0;
-let computerScore = 0;
-
 function getComputerChoice() {
     let choice = Math.floor((Math.random() * 3));
     let choiceWords = ["Rock", "Paper", "Scissors"];
@@ -64,15 +61,35 @@ function xVersusY(x, y) {
                         `'${x}' and '${y}'`);
 }
 
-function playRound(humanChoice, computerChoice) {
-    winner = xVersusY(humanChoice, computerChoice);
-    if (winner === "x"){
-        humanScore += 1;
-        console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
-    } else if (winner === "y") {
-        computerScore += 1;
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
-    } else {
-        console.log(`Draw. You both chose ${computerChoice}.`);
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+
+    function playRound(humanChoice, computerChoice) {
+        winner = xVersusY(humanChoice, computerChoice);
+        if (winner === "x"){
+            humanScore += 1;
+            console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+        } else if (winner === "y") {
+            computerScore += 1;
+            console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+        } else {
+            console.log(`Draw. You both chose ${computerChoice}.`);
+        }
     }
+
+    for (let i = 0; i < 5; i++) {
+        playRound(getHumanChoice(), getComputerChoice());
+    }
+    console.log("--- GAME OVER ---");
+    if (humanScore > computerScore)
+        console.log("You win!");
+    else if (computerScore > humanScore)
+        console.log("You lose!");
+    else
+        console.log("It's a draw!");
+
+    console.log(`You ${humanScore} - ${computerScore} Computer`);
 }
+
+playGame();
