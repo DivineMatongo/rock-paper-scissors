@@ -1,5 +1,5 @@
-let humanChoice = 0;
-let computerChoice = 0;
+let humanScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
     let choice = Math.floor((Math.random() * 3));
@@ -62,4 +62,17 @@ function xVersusY(x, y) {
     }
     throw new EvalError("Expected rock, paper, or scissors. Instead received " +
                         `'${x}' and '${y}'`);
+}
+
+function playRound(humanChoice, computerChoice) {
+    winner = xVersusY(humanChoice, computerChoice);
+    if (winner === "x"){
+        humanScore += 1;
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+    } else if (winner === "y") {
+        computerScore += 1;
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+    } else {
+        console.log(`Draw. You both chose ${computerChoice}.`);
+    }
 }
