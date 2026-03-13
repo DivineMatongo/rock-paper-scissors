@@ -1,3 +1,6 @@
+let humanChoice = 0;
+let computerChoice = 0;
+
 function getComputerChoice() {
     let choice = Math.floor((Math.random() * 3));
     let choiceWords = ["Rock", "Paper", "Scissors"];
@@ -20,4 +23,43 @@ function getHumanChoice() {
                        "Rock, paper, or scissors?";
         }
     }
+}
+
+function xVersusY(x, y) {
+    try {
+        x = x.toLowerCase();
+        y = y.toLowerCase();
+    } catch (error) {
+        if (error instanceof TypeError)
+            throw new TypeError("Function expects two String arguments");
+        else
+            throw error;
+    }
+
+    if (x === "rock") {
+        if (y === "rock")
+            return "draw";
+        else if (y === "paper")
+            return "y";
+        else if (y === "scissors")
+            return "x";
+
+    } else if (x === "paper") {
+        if (y === "paper")
+            return "draw";
+        else if (y === "rock")
+            return "x";
+        else if (y === "scissors")
+            return "y";
+
+    } else if (x === "scissors") {
+        if (y === "scissors")
+            return "draw";
+        else if (y === "rock")
+            return "y";
+        else if (y === "paper")
+            return "x";
+    }
+    throw new EvalError("Expected rock, paper, or scissors. Instead received " +
+                        `'${x}' and '${y}'`);
 }
