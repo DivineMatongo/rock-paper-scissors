@@ -1,0 +1,12 @@
+* {
+    outline: dotted 1px lime;
+}
+
+body {
+    height: 100vh;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
