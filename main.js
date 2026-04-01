@@ -1,9 +1,11 @@
+// Function used by computer to randomly select rock, paper, or scissors
 function getComputerChoice() {
     let choice = Math.floor((Math.random() * 3));
     let choiceWords = ["Rock", "Paper", "Scissors"];
     return choiceWords[choice];
 }
 
+// Prompts user to enter rock, paper, or scissors, case-insensitive
 function getHumanChoice() {
     let message = "Rock, paper, or scissors?";
     let choice;
@@ -17,11 +19,14 @@ function getHumanChoice() {
             return "Scissors";
         } else {
             message = "Invalid input. Please try again.\n" +
-                       "Rock, paper, or scissors?";
+                      "Rock, paper, or scissors?";
         }
     }
 }
 
+// Returns: String "x" or "y", depending on whether the first or second
+// argument wins, respectively, based on the rules of rock, paper, scissors.
+// Expects: two string arguments, each either "rock", "paper", or "scissors"
 function xVersusY(x, y) {
     try {
         x = x.toLowerCase();
@@ -61,10 +66,12 @@ function xVersusY(x, y) {
                         `'${x}' and '${y}'`);
 }
 
+// Plays five rounds with user, then displays winner 
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
 
+    // Evaluates one round and displays the result on the console
     function playRound(humanChoice, computerChoice) {
         winner = xVersusY(humanChoice, computerChoice);
         if (winner === "x"){
