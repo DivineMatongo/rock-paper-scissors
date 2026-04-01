@@ -10,3 +10,11 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+#screen {
+    height: 100px;
+    width: 400px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+}
