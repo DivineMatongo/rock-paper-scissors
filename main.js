@@ -99,4 +99,4 @@ function playGame() {
     console.log(`You ${humanScore} - ${computerScore} Computer`);
 }
 
-playGame();
+// playGame();
