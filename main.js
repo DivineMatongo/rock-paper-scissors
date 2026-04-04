@@ -1,18 +1,19 @@
 let humanScore = 0;
 let computerScore = 0;
 
+// Buttons for choosing rock, paper, or scissors
 const buttons = document.querySelector("#rps-buttons");
+// Start button (or Quit while playing)
 const playButton = document.querySelector("#play-quit");
-const gameScreen = document.querySelector("#screen");
+// Paragraph elements used to display score and results to the player
+const line1 = document.querySelector("#line1");
+const line2 = document.querySelector("#line2");
+const line3 = document.querySelector("#line3");
 
 const TITLE = "Rock Paper Scissors";
 const TARGET_MESSAGE = "First one to 5 wins!";
 const START_MESSAGE = "Click Start to play.";
 const PROMPT = "Rock Paper Scissors?";
-
-const line1 = document.querySelector("#line1");
-const line2 = document.querySelector("#line2");
-const line3 = document.querySelector("#line3");
 
 // Function used by computer to randomly select rock, paper, or scissors
 function getComputerChoice() {
@@ -21,28 +22,13 @@ function getComputerChoice() {
     return choiceWords[choice];
 }
 
-// Prompts user to enter rock, paper, or scissors, case-insensitive
-function getHumanChoice() {
-    let message = "Rock, paper, or scissors?";
-    let choice;
-    while (true) {
-        choice = prompt(message).toUpperCase().trim();
-        if ((choice === "ROCK") || (choice === "R")) {
-            return "Rock";
-        } else if ((choice === "PAPER") || (choice === "P")) {
-            return "Paper";
-        } else if ((choice === "SCISSORS") || (choice === "S")) {
-            return "Scissors";
-        } else {
-            message = "Invalid input. Please try again.\n" +
-                      "Rock, paper, or scissors?";
-        }
-    }
-}
-
-// Returns: String "x" or "y" or "draw", depending on whether the first or second
-// argument wins, or it's a draw, based on the rules of rock, paper, scissors.
-// Expects: two string arguments, each either "rock", "paper", or "scissors"
+/**  
+* Determines which argument wins according to the rules of Rock Paper Scissors
+*
+* @param {string} x - Either "rock", "paper" or "scissors" case-insensitive
+* @param {string} y - Either "rock", "paper" or "scissors" case-insensitive
+* @returns {string} Either "x", "y" or "draw" to show result
+*/
 function xVersusY(x, y) {
     try {
         x = x.toLowerCase();
@@ -82,6 +68,7 @@ function xVersusY(x, y) {
                         `'${x}' and '${y}'`);
 }
 
+// Enables and disables buttons when game starts or stops
 function startStopGame(start) {
     for (const btn of buttons.children) {
         btn.disabled = !start;
@@ -89,8 +76,10 @@ function startStopGame(start) {
     playButton.textContent = start ? "Quit" : "Start Game";
 }
 
+// Handler for Rock, Paper, or Scissors buttons
 buttons.addEventListener("click", (e) => {
     let computerChoice = getComputerChoice();
+    // Text on button pressed tells us human choice
     let humanChoice = e.target.textContent;
 
     winner = xVersusY(humanChoice, computerChoice);
@@ -101,6 +90,7 @@ buttons.addEventListener("click", (e) => {
     }
 
     if (humanScore >= 5 || computerScore >= 5) {
+        // Game over
         if (winner === "x") {
             line1.textContent = `Great! ${humanChoice} beats ${computerChoice}`;
             line2.textContent = `You win ${humanScore} - ${computerScore}!`;
@@ -113,6 +103,7 @@ buttons.addEventListener("click", (e) => {
         humanScore = computerScore = 0;
 
     } else {
+        // Game not yet over
         line1.textContent = `You ${humanScore} - ${computerScore} Computer`;
         if (winner === "x") {
             line2.textContent = `Great! ${humanChoice} beats ${computerChoice}`;
@@ -125,6 +116,7 @@ buttons.addEventListener("click", (e) => {
     }
 });
 
+// Handler for button that starts and stops the game
 playButton.addEventListener("click", () => {
     console.log(playButton.textContent);
     if (playButton.textContent === "Start Game") {
